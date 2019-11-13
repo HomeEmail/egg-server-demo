@@ -1,6 +1,13 @@
 const Controller = require('../core/base_controller');
 
 class UserController extends Controller {
+	//下面是使用egg-sequelize mysql2的例子
+	async index() {
+    const users = await this.ctx.model.Admin.findAll();
+    this.success({data:users});
+  }
+
+	//下面是使用egg-mysql的例子
 	async create(){
 		const ctx=this.ctx;
 		//console.log('cookie',this.ctx.cookies);

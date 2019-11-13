@@ -13,6 +13,8 @@ module.exports = app => {
 	router.get(projectRunName+'/login',controller.admin.login);
 	router.get(projectRunName+'/logout',controller.admin.logout);
 
+	router.get(projectRunName+'/admin',controller.admin.index);
+
 	router.get(projectRunName+'/admin/create',controller.admin.create);
 	router.get(projectRunName+'/admin/getOne',controller.admin.getOne);
 	router.get(projectRunName+'/admin/getAll',controller.admin.getAll);

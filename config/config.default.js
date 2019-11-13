@@ -65,6 +65,14 @@ module.exports = appInfo => {
 		logger : { //日记输出路径配置
 			dir: path.join(appInfo.baseDir, 'logs'),
 		},
+		sequelize : {
+			dialect: 'mysql',
+			host: '127.0.0.1',
+			port: 3306,
+			user:'root',
+			password:'123456',
+			database: 'egg-server-demo',
+		},
 		mysql : {
 			clients:{
 				// clientId, 获取client实例，需要通过 app.mysql.get('clientId') 获取

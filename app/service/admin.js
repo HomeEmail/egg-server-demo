@@ -11,8 +11,8 @@ class AdminService extends Service {
      		admin_password: new Literal(`SHA("${psw}")`),
 				admin_name:'user',
      		admin_age:23,
-     		update_at:mysqlClient.literals.now,
-     		create_at:mysqlClient.literals.now
+     		updated_at:mysqlClient.literals.now,
+     		created_at:mysqlClient.literals.now
      	});  
      	console.log(result);
      	const insertSuccess = result.affectedRows === 1;
@@ -38,7 +38,7 @@ class AdminService extends Service {
     	const result = await mysqlClient.select('admin',{
     		where:{disabled:0,admin_name:['user']},//where条件
     		columns:['admin_id','admin_name','admin_account'],//要查询的表字段
-    		orders:[['create_at','desc'],['admin_id','desc']],//排序方式
+    		orders:[['created_at','desc'],['admin_id','desc']],//排序方式
     		limit:10,//返回数据量
     		offset:0,//数据偏移量
     	});
@@ -55,7 +55,8 @@ class AdminService extends Service {
     	const mysqlClient = this.app.mysql.get('db1'); 
     	const row = {
     		admin_name:'user1'+Date.now(),
-				update_at:mysqlClient.literals.now,
+				updated_at:mysqlClient.literals.now,
+				last_sign_in_at:mysqlClient.literals.now,
 				disabled:1,
     	};
     	const options = {

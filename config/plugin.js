@@ -13,6 +13,10 @@ exports.mysql = {
 	enable:true,
 	package:'egg-mysql',
 };
+exports.sequelize = {
+  enable: true,
+  package: 'egg-sequelize',
+};
 
 //允许跨域配置 //有问题，设置后没法发送session
 // exports.cors = {
