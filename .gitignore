@@ -2,3 +2,5 @@ package-lock.json
 run
 logs
 app/public/apidoc
+coverage/
+node_modules/
