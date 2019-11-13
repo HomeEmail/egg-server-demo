@@ -10,16 +10,15 @@ module.exports = app => {
 
 	router.get(projectRunName+'/captcha',controller.captcha.index);
 	router.get(projectRunName+'/loginKey',controller.loginKey.index);
-	router.get(projectRunName+'/login',controller.user.login);
-	router.get(projectRunName+'/logout',controller.user.logout);
+	router.get(projectRunName+'/login',controller.admin.login);
+	router.get(projectRunName+'/logout',controller.admin.logout);
 
-	router.get(projectRunName+'/user',controller.user.getAll);
-	router.get(projectRunName+'/user/new',controller.user.create);
-	router.get(projectRunName+'/user/getOne',controller.user.getOne);
-	router.get(projectRunName+'/user/getAll',controller.user.getAll);
-	router.get(projectRunName+'/user/getByWhere',controller.user.getByWhere);
-	router.get(projectRunName+'/user/update',controller.user.update);
-	router.get(projectRunName+'/user/del',controller.user.del);
+	router.get(projectRunName+'/admin/create',controller.admin.create);
+	router.get(projectRunName+'/admin/getOne',controller.admin.getOne);
+	router.get(projectRunName+'/admin/getAll',controller.admin.getAll);
+	router.get(projectRunName+'/admin/getByWhere',controller.admin.getByWhere);
+	router.get(projectRunName+'/admin/update',controller.admin.update);
+	router.get(projectRunName+'/admin/del',controller.admin.del);
 
 	//这里可以引入其他路由集合
 	//require('./router/incentive/router')(app);

@@ -1,67 +1,48 @@
 const Service = require('egg').Service;
 
-class UserService extends Service {
+class AdminService extends Service {
     async create(body){
      	const mysqlClient = this.app.mysql.get('db1'); 
      	const Literal = mysqlClient.literals.Literal;
      	let psw='123456';
-     	const result = await mysqlClient.insert('user',{
-     		name:'user1',
-     		username:'user'+Date.now(),
-     		password: new Literal(`SHA("${psw}")`),
-     		age:23,
+     	const result = await mysqlClient.insert('admin',{
+				admin_account:'user'+Date.now(),
+				admin_email:'22'+Date.now()+'@qq.com',
+     		admin_password: new Literal(`SHA("${psw}")`),
+				admin_name:'user',
+     		admin_age:23,
      		update_at:mysqlClient.literals.now,
      		create_at:mysqlClient.literals.now
      	});  
      	console.log(result);
      	const insertSuccess = result.affectedRows === 1;
      	if(insertSuccess){
-     		return {
-     			code : 1,
-     			msg:'插入成功',
-     			id:result.insertId
-     		};
+     		return result.insertId;
      	}else{
-	     	return {
-	     		code:0,
-	     		msg:'插入失败'
-	     	};
-
+	     	return null;
      	}
     }
-    async getOne(id = 1){
+    async getOne(id = 4){
     	const mysqlClient = this.app.mysql.get('db1'); 
-		const result = await mysqlClient.get('user',{id:id});
-		console.log('------getOne-----',result);
-    	return {
-			code:1,
-			data:result,
-			msg:'获取成功'
-		};
+			const result = await mysqlClient.get('admin',{admin_id:id});
+			console.log('------getOne-----',result);
+    	return result;
     }
     async getAll(){
     	const mysqlClient = this.app.mysql.get('db1'); 
-    	const result = await mysqlClient.select('user');
-    	return {
-			code:1,
-			data:result,
-			msg:'获取成功'
-		};
+    	const result = await mysqlClient.select('admin');
+    	return result;
     }
     async getByWhere(body){
     	const mysqlClient = this.app.mysql.get('db1'); 
-    	const result = await mysqlClient.select('user',{
-    		where:{id:1,username:['user1']},//where条件
-    		columns:['id','name','username'],//要查询的表字段
-    		orders:[['create_at','desc'],['id','desc']],//排序方式
+    	const result = await mysqlClient.select('admin',{
+    		where:{disabled:0,admin_name:['user']},//where条件
+    		columns:['admin_id','admin_name','admin_account'],//要查询的表字段
+    		orders:[['create_at','desc'],['admin_id','desc']],//排序方式
     		limit:10,//返回数据量
     		offset:0,//数据偏移量
     	});
-    	return {
-			code:1,
-			data:result,
-			msg:'获取成功'
-		};
+    	return result;
     }
     async query(body){ //直接执行 sql 语句
     	const mysqlClient = this.app.mysql.get('db1'); 
@@ -73,50 +54,35 @@ class UserService extends Service {
     async update(body){
     	const mysqlClient = this.app.mysql.get('db1'); 
     	const row = {
-    		name:'user1'+Date.now(),
-    		update_at:mysqlClient.literals.now,
+    		admin_name:'user1'+Date.now(),
+				update_at:mysqlClient.literals.now,
+				disabled:1,
     	};
     	const options = {
     		where:{
-    			id:1
+    			admin_id:1
     		}
     	};
 
-    	const result = await mysqlClient.update('user',row,options);
+    	const result = await mysqlClient.update('admin',row,options);
     	console.log(result);
      	const updateSuccess = result.affectedRows >= 1;
      	if(updateSuccess){
-     		return {
-     			code : 1,
-     			msg:'更新成功',
-     			rowNum:result.affectedRows
-     		};
+     		return result.affectedRows;
      	}else{
-	     	return {
-	     		code:0,
-	     		msg:'更新失败',
-     			rowNum:result.affectedRows
-	     	};
+	     	return null;
 
      	}
     }
     async del(id = 3){
     	const mysqlClient = this.app.mysql.get('db1'); 
-    	const result = await mysqlClient.delete('user',{id:id});
+    	const result = await mysqlClient.delete('admin',{admin_id:id});
     	console.log(result);
      	const deleteSuccess = result.affectedRows >= 1;
      	if(deleteSuccess){
-     		return {
-     			code : 1,
-     			msg:'删除成功',
-     			rowNum:result.affectedRows
-     		};
+     		return result.affectedRows;
      	}else{
-	     	return {
-	     		code:0,
-	     		msg:'删除失败',
-     			rowNum:result.affectedRows
-	     	};
+	     	return null;
 
      	}
     }
@@ -149,4 +115,4 @@ class UserService extends Service {
 
 
 }
-module.exports = UserService;
+module.exports = AdminService;
