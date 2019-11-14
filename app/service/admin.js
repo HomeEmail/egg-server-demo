@@ -1,4 +1,4 @@
-const Service = require('egg').Service;
+const Service = require('../core/base_service');
 
 class AdminService extends Service {
     async create(body){
@@ -26,8 +26,28 @@ class AdminService extends Service {
     	const mysqlClient = this.app.mysql.get('db1'); 
 			const result = await mysqlClient.get('admin',{admin_id:id});
 			console.log('------getOne-----',result);
+			
     	return result;
-    }
+		}
+		async getByPage(pageNo=1,pageSize=1){
+			let offset = (pageNo - 1) * pageSize;//偏移值
+			if (offset < 0) offset = 0;
+			const result = await this.queryByPage({
+				primaryKey:'admin_id',
+				select:'admin_id,admin_account,admin_name,admin_age,admin_email',
+				from:'admin',
+				where:[
+					{
+						conf:'disabled=?',
+						value:0,
+					}
+				],
+				orderBy:'admin_id DESC',
+				offset:offset,
+				pageSize:pageSize,
+			});
+			return result;
+		}
     async getAll(){
     	const mysqlClient = this.app.mysql.get('db1'); 
     	const result = await mysqlClient.select('admin');

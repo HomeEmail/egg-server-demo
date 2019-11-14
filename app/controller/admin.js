@@ -25,6 +25,45 @@ class UserController extends Controller {
 		this.success({data:result});
 
 	}
+	async getByPage(){ //分页查询demo
+		const ctx=this.ctx;
+		let {pageNo,pageSize} = ctx.query;//获取到的是字符串型
+		if(pageNo){
+			pageNo = parseInt(pageNo, 10);
+		} else {
+			pageNo = 1;
+		}
+		if(pageSize){
+			pageSize = parseInt(pageSize, 10);
+		} else {
+			pageSize = 20;
+		}
+		//创建参数校验规则
+    let createRule = {
+      pageNo: {
+        type: 'int',
+        required: false,//默认就是true
+        default: 1,
+      },
+      pageSize: {
+        type: 'int',
+        required: false,//默认就是true
+        default: 20,
+      },
+    };
+    // 校验 `ctx.request.body` 是否符合我们预期的格式
+    // 如果参数校验未通过，将会抛出一个 status = 422 的异常
+    //debugger;
+    try {
+      ctx.validate(createRule, {pageNo,pageSize});
+    } catch (err) {
+      //ctx.logger.warn(err.message);
+      this.failure('参数有误！');
+      return 0;
+    }
+		const result = await ctx.service.admin.getByPage(pageNo||1,pageSize||10);
+		this.success({...result});
+	}
 	async getAll(){
 		const ctx=this.ctx;
 		const result=await ctx.service.admin.getAll();

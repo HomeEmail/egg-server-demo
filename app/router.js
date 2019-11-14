@@ -17,6 +17,7 @@ module.exports = app => {
 
 	router.get(projectRunName+'/admin/create',controller.admin.create);
 	router.get(projectRunName+'/admin/getOne',controller.admin.getOne);
+	router.get(projectRunName+'/admin/getByPage',controller.admin.getByPage);
 	router.get(projectRunName+'/admin/getAll',controller.admin.getAll);
 	router.get(projectRunName+'/admin/getByWhere',controller.admin.getByWhere);
 	router.get(projectRunName+'/admin/update',controller.admin.update);
