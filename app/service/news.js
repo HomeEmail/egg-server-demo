@@ -16,9 +16,9 @@ class NewsService extends Service {
 				},
 				dataType: 'json'
 			});
-			//把返回结果的data字段赋值给变量idList
+			// 把返回结果的data字段赋值给变量idList
 			// const {data:idList} = result;
-			idList = result.data;
+			idList = result.data
 		} catch (err) {
 			console.log(err.message);
 		}
