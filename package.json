@@ -11,7 +11,7 @@
     "cov": "egg-bin cov",
     "start": "egg-scripts start --port=8080 --daemon",
     "stop": "egg-scripts stop",
-    "lint": "npx eslint ./app",
+    "lint": "npx eslint app",
     "test1": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -73,8 +73,8 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,vue}": [
-      "npx eslint ./app",
+    "*.{js}": [
+      "npx eslint app",
       "git add"
     ]
   }
