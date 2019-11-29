@@ -1,7 +1,7 @@
 # egg-server-demo样例工程
 
 ## 规范说明
-符合参考研发部[开发规范](http://gitlab.uniin.cn/spec/dev/tree/nodejs/nodejs)《nodejs工程通用开发规范指南》 和 《基于egg框架的工程开发规范》
+符合参考开发规范《nodejs工程通用开发规范指南》 和 《基于egg框架的工程开发规范》
 ## 集成特性
 - 鉴权逻辑
 - 路径缓存逻辑
