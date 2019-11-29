@@ -197,20 +197,7 @@ module.exports = appInfo => {
 		
 		//后端上传文件路径前缀
 		uploadBasePath:path.join(appInfo.baseDir,'upload'),
-		//iboss session api
-		//GET
-		//test https://10.41.1.156:8095/bss-login-management/acquireInfoBySession?=2222
-		//正式 https://iboss.uniin.cn/bss-login-management/acquireInfoBySession?_=1571901606934
-		//POST
-		//test https://10.41.1.156:8093/cop/session/getSessionInfo
-		//正式 https://iboss.uniin.cn:8093/cop/session/getSessionInfo
-
-		ibossSessionApi:{
-			method: 'POST',
-			protocol: 'https://',
-			host: '10.41.1.156:8093',
-			path: '/cop/session/getSessionInfo',
-		},
+		
 		//前端读取图片路径前缀
 		imageProfix:'http://1.1.1.1:81/xx/uploadFile/image/',
 		//前端读取音频路径前缀
