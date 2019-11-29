@@ -4,3 +4,4 @@ logs
 app/public/apidoc
 coverage/
 node_modules/
+.vscode
